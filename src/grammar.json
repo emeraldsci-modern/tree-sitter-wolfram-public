@@ -1287,6 +1287,10 @@
         {
           "type": "SYMBOL",
           "name": "out"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "linear_syntax"
         }
       ]
     },
@@ -1641,6 +1645,38 @@
     "string": {
       "type": "PATTERN",
       "value": "\\\"([^\\\"\\\\]|\\\\(.|\\n))*\\\""
+    },
+    "linear_syntax": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\("
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[^\\\\]"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\\\[^)]"
+                }
+              ]
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "\\)"
+          }
+        ]
+      }
     },
     "slot_sequence": {
       "type": "TOKEN",
@@ -2029,160 +2065,177 @@
             "value": "::"
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "CHOICE",
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "SEQ",
                     "members": [
-                      {
-                        "type": "PATTERN",
-                        "value": "[$a-zA-Z]"
-                      },
                       {
                         "type": "CHOICE",
                         "members": [
                           {
-                            "type": "STRING",
-                            "value": "\\[CapitalDelta]"
+                            "type": "PATTERN",
+                            "value": "[$a-zA-Z]"
                           },
                           {
-                            "type": "STRING",
-                            "value": "\\[CapitalSigma]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[Alpha]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[Beta]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[Pi]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[Sigma]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[Lambda]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[CurlyEpsilon]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[FilledSquare]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[FilledCircle]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[FilledDiamond]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[EmptySquare]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[EmptyCircle]"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\\[Infinity]"
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "STRING",
+                                "value": "\\[CapitalDelta]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[CapitalSigma]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[Alpha]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[Beta]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[Pi]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[Sigma]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[Lambda]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[CurlyEpsilon]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[FilledSquare]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[FilledCircle]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[FilledDiamond]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[EmptySquare]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[EmptyCircle]"
+                              },
+                              {
+                                "type": "STRING",
+                                "value": "\\[Infinity]"
+                              }
+                            ]
                           }
                         ]
-                      }
-                    ]
-                  },
-                  {
-                    "type": "REPEAT",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "PATTERN",
-                          "value": "[$a-zA-Z0-9]"
-                        },
-                        {
+                      },
+                      {
+                        "type": "REPEAT",
+                        "content": {
                           "type": "CHOICE",
                           "members": [
                             {
-                              "type": "STRING",
-                              "value": "\\[CapitalDelta]"
+                              "type": "PATTERN",
+                              "value": "[$a-zA-Z0-9]"
                             },
                             {
-                              "type": "STRING",
-                              "value": "\\[CapitalSigma]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[Alpha]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[Beta]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[Pi]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[Sigma]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[Lambda]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[CurlyEpsilon]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[FilledSquare]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[FilledCircle]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[FilledDiamond]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[EmptySquare]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[EmptyCircle]"
-                            },
-                            {
-                              "type": "STRING",
-                              "value": "\\[Infinity]"
+                              "type": "CHOICE",
+                              "members": [
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[CapitalDelta]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[CapitalSigma]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[Alpha]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[Beta]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[Pi]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[Sigma]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[Lambda]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[CurlyEpsilon]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[FilledSquare]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[FilledCircle]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[FilledDiamond]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[EmptySquare]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[EmptyCircle]"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": "\\[Infinity]"
+                                }
+                              ]
                             }
                           ]
                         }
-                      ]
-                    }
+                      }
+                    ]
                   }
-                ]
+                },
+                "named": true,
+                "value": "message_tag"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "\\\"([^\\\"\\\\]|\\\\(.|\\n))*\\\""
+                  }
+                },
+                "named": true,
+                "value": "message_tag"
               }
-            },
-            "named": true,
-            "value": "message_tag"
+            ]
           },
           {
             "type": "CHOICE",
@@ -2198,160 +2251,177 @@
                     }
                   },
                   {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "IMMEDIATE_TOKEN",
-                      "content": {
-                        "type": "SEQ",
-                        "members": [
-                          {
-                            "type": "CHOICE",
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "IMMEDIATE_TOKEN",
+                          "content": {
+                            "type": "SEQ",
                             "members": [
-                              {
-                                "type": "PATTERN",
-                                "value": "[$a-zA-Z]"
-                              },
                               {
                                 "type": "CHOICE",
                                 "members": [
                                   {
-                                    "type": "STRING",
-                                    "value": "\\[CapitalDelta]"
+                                    "type": "PATTERN",
+                                    "value": "[$a-zA-Z]"
                                   },
                                   {
-                                    "type": "STRING",
-                                    "value": "\\[CapitalSigma]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[Alpha]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[Beta]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[Pi]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[Sigma]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[Lambda]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[CurlyEpsilon]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[FilledSquare]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[FilledCircle]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[FilledDiamond]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[EmptySquare]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[EmptyCircle]"
-                                  },
-                                  {
-                                    "type": "STRING",
-                                    "value": "\\[Infinity]"
+                                    "type": "CHOICE",
+                                    "members": [
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[CapitalDelta]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[CapitalSigma]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[Alpha]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[Beta]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[Pi]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[Sigma]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[Lambda]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[CurlyEpsilon]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[FilledSquare]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[FilledCircle]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[FilledDiamond]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[EmptySquare]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[EmptyCircle]"
+                                      },
+                                      {
+                                        "type": "STRING",
+                                        "value": "\\[Infinity]"
+                                      }
+                                    ]
                                   }
                                 ]
-                              }
-                            ]
-                          },
-                          {
-                            "type": "REPEAT",
-                            "content": {
-                              "type": "CHOICE",
-                              "members": [
-                                {
-                                  "type": "PATTERN",
-                                  "value": "[$a-zA-Z0-9]"
-                                },
-                                {
+                              },
+                              {
+                                "type": "REPEAT",
+                                "content": {
                                   "type": "CHOICE",
                                   "members": [
                                     {
-                                      "type": "STRING",
-                                      "value": "\\[CapitalDelta]"
+                                      "type": "PATTERN",
+                                      "value": "[$a-zA-Z0-9]"
                                     },
                                     {
-                                      "type": "STRING",
-                                      "value": "\\[CapitalSigma]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[Alpha]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[Beta]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[Pi]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[Sigma]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[Lambda]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[CurlyEpsilon]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[FilledSquare]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[FilledCircle]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[FilledDiamond]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[EmptySquare]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[EmptyCircle]"
-                                    },
-                                    {
-                                      "type": "STRING",
-                                      "value": "\\[Infinity]"
+                                      "type": "CHOICE",
+                                      "members": [
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[CapitalDelta]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[CapitalSigma]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[Alpha]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[Beta]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[Pi]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[Sigma]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[Lambda]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[CurlyEpsilon]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[FilledSquare]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[FilledCircle]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[FilledDiamond]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[EmptySquare]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[EmptyCircle]"
+                                        },
+                                        {
+                                          "type": "STRING",
+                                          "value": "\\[Infinity]"
+                                        }
+                                      ]
                                     }
                                   ]
                                 }
-                              ]
-                            }
+                              }
+                            ]
                           }
-                        ]
+                        },
+                        "named": true,
+                        "value": "message_tag"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "IMMEDIATE_TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "\\\"([^\\\"\\\\]|\\\\(.|\\n))*\\\""
+                          }
+                        },
+                        "named": true,
+                        "value": "message_tag"
                       }
-                    },
-                    "named": true,
-                    "value": "message_tag"
+                    ]
                   }
                 ]
               },
@@ -3850,6 +3920,23 @@
         },
         {
           "type": "PREC_LEFT",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              },
+              {
+                "type": "STRING",
+                "value": ","
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC_LEFT",
           "value": 36,
           "content": {
             "type": "SEQ",
@@ -4575,6 +4662,48 @@
               {
                 "type": "STRING",
                 "value": "\\[MinusPlus]"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 76,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              },
+              {
+                "type": "STRING",
+                "value": "\\[Equilibrium]"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 76,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              },
+              {
+                "type": "STRING",
+                "value": "\\[Distributed]"
               },
               {
                 "type": "SYMBOL",
