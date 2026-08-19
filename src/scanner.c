@@ -4,11 +4,16 @@
 
 enum TokenType {
   COMMENT,
-  STATEMENT_SEP
+  STATEMENT_SEP,
+  INTEGER
 };
 
 static inline bool is_horizontal_space(int32_t c) {
   return c == ' ' || c == '\t' || c == '\r' || c == '\f' || c == '\v';
+}
+
+static inline bool is_digit(int32_t c) {
+  return c >= '0' && c <= '9';
 }
 
 static bool scan_comment(TSLexer *lexer) {
@@ -97,6 +102,23 @@ bool tree_sitter_wolfram_external_scanner_scan(void *payload, TSLexer *lexer, co
   // all remaining whitespace as ordinary extras before checking for a comment.
   while (iswspace(lexer->lookahead)) {
     lexer->advance(lexer, true);
+  }
+
+  // A digit run immediately followed by `..` is an integer with Repeated
+  // applied, not a trailing-dot real followed by a Dot. mark_end pins the token
+  // at the last digit while we read on to decide.
+  if (valid_symbols[INTEGER] && is_digit(lexer->lookahead)) {
+    while (is_digit(lexer->lookahead)) {
+      lexer->advance(lexer, false);
+    }
+    lexer->mark_end(lexer);
+
+    if (lexer->lookahead != '.') return false;
+    lexer->advance(lexer, false);
+    if (lexer->lookahead != '.') return false;
+
+    lexer->result_symbol = INTEGER;
+    return true;
   }
 
   if (lexer->lookahead == '(') {

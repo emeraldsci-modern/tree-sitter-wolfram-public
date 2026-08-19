@@ -205,7 +205,7 @@
 
     extras: ($) => [$.comment, /\s/, /\\(\r)?\n/],
 
-    externals: ($) => [$.comment, $._statement_sep],
+    externals: ($) => [$.comment, $._statement_sep, $.integer],
 
     rules: {
       // Top-level expressions are separated by statement separators (significant

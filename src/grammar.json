@@ -5002,6 +5002,10 @@
     {
       "type": "SYMBOL",
       "name": "_statement_sep"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "integer"
     }
   ],
   "inline": [],
