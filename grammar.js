@@ -203,7 +203,7 @@
   (module.exports = grammar({
     name: "wolfram",
 
-    extras: ($) => [$.comment, /\s/],
+    extras: ($) => [$.comment, /\s/, /\\(\r)?\n/],
 
     externals: ($) => [$.comment, $._statement_sep],
 
